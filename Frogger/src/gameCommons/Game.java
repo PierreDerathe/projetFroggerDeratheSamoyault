@@ -77,6 +77,7 @@ public class Game {
 	 */
 	public boolean testLose() {
 		return !environment.isSafe(frog.getPosition());
+
 	}
 
 	/**
