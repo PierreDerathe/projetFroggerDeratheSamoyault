@@ -2,7 +2,7 @@ package environment;
 
 import java.awt.Color;
 
-import gameCommons.Case;
+import util.Case;
 import gameCommons.Game;
 import graphicalElements.Element;
 

@@ -1,9 +1,9 @@
 package environment;
 
-import java.util.ArrayList;
-
-import gameCommons.Case;
+import util.Case;
 import gameCommons.Game;
+
+import java.util.ArrayList;
 
 public class Lane {
 	private Game game;
@@ -12,21 +12,32 @@ public class Lane {
 	private ArrayList<Car> cars = new ArrayList<>();
 	private boolean leftToRight;
 	private double density;
+	private int timer;
 
 	// TODO : Constructeur(s)
 
 	public void update() {
 
-		// TODO
+		timer++;
+		if (timer == speed){
+			timer = 0;
+			for (Car car :
+					cars) {
+				car.update();
+				if (leftToRight){
+					if (car)
+				}
+			}
+		}
 
-		// Toutes les voitures se déplacent d'une case au bout d'un nombre "tic
-		// d'horloge" égal à leur vitesse
-		// Notez que cette méthode est appelée à chaque tic d'horloge
+		// Toutes les voitures se dï¿½placent d'une case au bout d'un nombre "tic
+		// d'horloge" ï¿½gal ï¿½ leur vitesse
+		// Notez que cette mï¿½thode est appelï¿½e ï¿½ chaque tic d'horloge
 
 		// Les voitures doivent etre ajoutes a l interface graphique meme quand
 		// elle ne bougent pas
 
-		// A chaque tic d'horloge, une voiture peut être ajoutée
+		// A chaque tic d'horloge, une voiture peut ï¿½tre ajoutï¿½e
 
 	}
 
@@ -37,8 +48,8 @@ public class Lane {
 	 */
 
 	/**
-	 * Ajoute une voiture au début de la voie avec probabilité égale à la
-	 * densité, si la première case de la voie est vide
+	 * Ajoute une voiture au dï¿½but de la voie avec probabilitï¿½ ï¿½gale ï¿½ la
+	 * densitï¿½, si la premiï¿½re case de la voie est vide
 	 */
 	private void mayAddCar() {
 		if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
