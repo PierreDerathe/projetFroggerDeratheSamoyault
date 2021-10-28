@@ -1,10 +1,10 @@
 package environment;
 
-import java.awt.Color;
-
-import gameCommons.Case;
+import util.Case;
 import gameCommons.Game;
 import graphicalElements.Element;
+
+import java.awt.*;
 
 public class Car {
 	private Game game;
@@ -19,11 +19,22 @@ public class Car {
 		this.leftPosition=leftPosition;
 		this.leftToRight=leftToRight;
 		this.length=length;
-		this.colorLtR=colorLtR;
+		this.colorLtR= colorLtR;
 		this.colorRtL=colorRtL;
 	}
 	
-	//TODO : ajout de methodes
+	public void update(int speed){
+		if(!leftToRight){
+			speed = -speed; /* si la voiture va vers la droite la vitesse est positive et négative dans l'autre cas */
+		}
+	}
+	public Case getLeftPosition(){
+		return leftPosition;
+	}
+	public Case getRightPosition(){
+		return new Case(leftPosition.absc+length -1, leftPosition.ord );
+	}
+
 
 	
 	
