@@ -13,7 +13,6 @@ public class Frog implements IFrog {
 	private Case position;
 	private Direction direction;
 
-
 	@Override
 	public Case getPosition(){
 		return position;
