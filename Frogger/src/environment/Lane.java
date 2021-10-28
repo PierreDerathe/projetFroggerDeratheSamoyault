@@ -12,12 +12,23 @@ public class Lane {
 	private ArrayList<Car> cars = new ArrayList<>();
 	private boolean leftToRight;
 	private double density;
+	private int timer;
 
 	// TODO : Constructeur(s)
 
 	public void update() {
 
-		// TODO
+		timer++;
+		if (timer == speed){
+			timer = 0;
+			for (Car car :
+					cars) {
+				car.update();
+				if (leftToRight){
+					if (car)
+				}
+			}
+		}
 
 		// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
 		// d'horloge" �gal � leur vitesse
