@@ -14,8 +14,6 @@ public class Lane {
 	private double density;
 	private int timer;
 
-	// TODO : Constructeur(s)
-
 	public void update() {
 
 		timer++;

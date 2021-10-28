@@ -28,17 +28,19 @@ public class Car {
 			speed = -speed; /* si la voiture va vers la droite la vitesse est positive et négative dans l'autre cas */
 		}
 	}
-	public Case getLeftPosition(){
-		return leftPosition;
+
+	public boolean appearsInBounds(){
+		return this.leftPosition.absc+this.length>0 || this.leftPosition.absc<this.game.width;
 	}
-	public Case getRightPosition(){
-		return new Case(leftPosition.absc+length -1, leftPosition.ord );
+	public boolean isOnCase(Case c){
+		if(c.ord != this.leftPosition.ord){
+			return false;
+		}else{
+			return c.absc >= this.leftPosition.absc && c.absc < this.leftPosition.absc + this.length;
+		}
 	}
 
-
-	
-	
-	/* Fourni : addToGraphics() permettant d'ajouter un element graphique correspondant a la voiture*/
+		/* Fourni : addToGraphics() permettant d'ajouter un element graphique correspondant a la voiture*/
 	private void addToGraphics() {
 		for (int i = 0; i < length; i++) {
 			Color color = colorRtL;
