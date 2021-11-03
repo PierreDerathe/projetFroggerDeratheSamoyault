@@ -1,31 +1,43 @@
 package environment;
 
-import java.awt.*;
 import java.util.ArrayList;
-
 import frog.Frog;
+import gameCommons.Case;
 import util.Case;
 import gameCommons.Game;
 import gameCommons.IEnvironment;
 
 public class Environment implements IEnvironment {
-		private Game game;
-		private Case c;
-		private Frog frog;
-		private ArrayList<Lane > lane= new ArrayList<>(); //A conserver ou non
-        private Car car;
-        private final Color colorLtR = Color.BLACK;
-        private final Color colorRtL = Color.BLUE;
+    private ArrayList<Lane> road;
+    private Game game;
 
-        public Environment(Game game,Frog frog, Case c ,ArrayList<Lane > lane, Car car, Color colorLtR, Color colorRtL){
-            this.game = game;
-            this.c=c;
-            this.frog=frog;
-            this.car=car;
-            this.colorRtL=colorRtL;
-            this.colorLtR=colorLtR;
+    public Environment(Game game){
+        this.game=game;
+        this.road= new ArrayList<Lane>();
+        this.road.add(new Game, new Case(game.width, game.height));
 
+        for(int i=1; i<game.height; i++){
+            this.road.add(new Lane(game, i)); // on va supposer que le constructeur Lane à été déclaré ici et en bas
         }
+        this.road.add(new Lane(game,  game.height - 1, game.height))
+    }
 
 
+    @Override
+    public boolean isSafe(Case aCase) {
+        return false;
+    }
+
+    @Override
+    public boolean isWinningPosition(Case aCase) {
+        return false;
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    private ArrayList<Lane> road;
+    private Game game;
 }
