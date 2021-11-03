@@ -34,6 +34,16 @@ public class Environment implements IEnvironment {
     }
 
     @Override
+    public boolean isSafe(util.Case c) {
+        return false;
+    }
+
+    @Override
+    public boolean isWinningPosition(util.Case c) {
+        return false;
+    }
+
+    @Override
     public void update() {
 
     }

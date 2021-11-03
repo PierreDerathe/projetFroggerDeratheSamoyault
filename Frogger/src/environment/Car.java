@@ -14,25 +14,22 @@ public class Car {
 	private final Color colorLtR = Color.BLACK;
 	private final Color colorRtL = Color.BLUE;
 
-	public Car(Game game, Case leftPosition, boolean leftToRight, int length, Color colorLtR, Color colorRtL){
+	public Car(Game game, Case leftPosition, boolean leftToRight, int length){
 		this.game= game;
 		this.leftPosition=leftPosition;
 		this.leftToRight=leftToRight;
 		this.length=length;
-		this.colorLtR= colorLtR;
-		this.colorRtL=colorRtL;
 	}
 	
-	public void update(int speed){
-		if(!leftToRight){
-			speed = -speed; /* si la voiture va vers la droite la vitesse est positive et négative dans l'autre cas */
-		}
+	public void move(){
+		leftPosition = new Case(leftPosition.absc+(leftToRight?1:(-1)), leftPosition.ord);/* si la voiture va vers la droite la vitesse est positive et négative dans l'autre cas */
 	}
 
 	public boolean appearsInBounds(){
 		return this.leftPosition.absc+this.length>0 || this.leftPosition.absc<this.game.width;
 	}
-	public boolean isOnCase(Case c){
+
+	public boolean coversCase(Case c){
 		if(c.ord != this.leftPosition.ord){
 			return false;
 		}else{

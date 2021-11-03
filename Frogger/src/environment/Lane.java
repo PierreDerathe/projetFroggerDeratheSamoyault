@@ -14,6 +14,10 @@ public class Lane {
 	private double density;
 	private int timer;
 
+	public Lane(gameCommons.Game game, int ord, double density) { /* compiled code */ }
+
+	public Lane(gameCommons.Game game, int ord) { /* compiled code */ }
+
 	public void update() {
 
 		timer++;
@@ -21,7 +25,7 @@ public class Lane {
 			timer = 0;
 			for (Car car :
 					cars) {
-				car.update();
+				car.move();
 				if (leftToRight){
 					if (car)
 				}
@@ -41,6 +45,17 @@ public class Lane {
 
 	// TODO : ajout de methodes
 
+	private void moveCars(boolean b) {
+		if (b) for (Car car :
+				cars) {
+			car.move();
+		}
+	}
+
+	private void removeOldCars() {
+		while (!cars.get(0).appearsInBounds()) cars.remove(0);
+	}
+
 	/*
 	 * Fourni : mayAddCar(), getFirstCase() et getBeforeFirstCase() 
 	 */
@@ -52,9 +67,13 @@ public class Lane {
 	private void mayAddCar() {
 		if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
 			if (game.randomGen.nextDouble() < density) {
-				cars.add(new Car(game, getBeforeFirstCase(), leftToRight));
+				cars.add(new Car(game, getBeforeFirstCase(), leftToRight, 2));
 			}
 		}
+	}
+
+	public boolean isSafe(util.Case pos) {
+		return cars.get(cars.size()-1).coversCase(pos);
 	}
 
 	private Case getFirstCase() {
@@ -70,5 +89,7 @@ public class Lane {
 		} else
 			return new Case(game.width, ord);
 	}
+
+	public java.lang.String toString() { /* compiled code */ }
 
 }
