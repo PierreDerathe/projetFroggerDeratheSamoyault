@@ -21,16 +21,9 @@ public class Lane {
 	public void update() {
 
 		timer++;
-		if (timer == speed){
-			timer = 0;
-			for (Car car :
-					cars) {
-				car.move();
-				if (leftToRight){
-					if (car)
-				}
-			}
-		}
+		moveCars(timer % speed == 0);
+		removeOldCars();
+		mayAddCar();
 
 		// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
 		// d'horloge" �gal � leur vitesse
@@ -90,6 +83,9 @@ public class Lane {
 			return new Case(game.width, ord);
 	}
 
-	public java.lang.String toString() { /* compiled code */ }
+	@Override
+	public String toString() {
+		return String.valueOf(cars.size());
+	}
 
 }

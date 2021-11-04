@@ -5,12 +5,13 @@ import gameCommons.Game;
 import graphicalElements.Element;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Car {
 	private Game game;
 	private Case leftPosition;
-	private boolean leftToRight;
-	private int length;
+	private final boolean leftToRight;
+	private final int length;
 	private final Color colorLtR = Color.BLACK;
 	private final Color colorRtL = Color.BLUE;
 
@@ -18,7 +19,7 @@ public class Car {
 		this.game= game;
 		this.leftPosition=leftPosition;
 		this.leftToRight=leftToRight;
-		this.length=length;
+		this.length = getRandomNumberInRange(1, 3);
 	}
 	
 	public void move(){
@@ -47,6 +48,13 @@ public class Car {
 			game.getGraphic()
 					.add(new Element(leftPosition.absc + i, leftPosition.ord, color));
 		}
+	}
+
+	private static int getRandomNumberInRange(int min, int max) {
+
+		Random r = new Random();
+		return r.ints(min, (max + 1)).limit(1).findFirst().getAsInt();
+
 	}
 
 }
