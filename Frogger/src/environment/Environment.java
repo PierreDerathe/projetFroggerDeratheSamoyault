@@ -24,20 +24,20 @@ public class Environment implements IEnvironment {
 
 
     @Override
-    public boolean isSafe(Case aCase) {
-       return road.get(aCase.ord).isSafe(aCase);
+    public boolean isSafe(Case c) {
+       return road.get(c.ord).isSafe(c);
     }
 
     @Override
-    public boolean isWinningPosition(Case aCase) {
-        return aCase.ord == game.height-1;
+    public boolean isWinningPosition(Case c) {
+        return c.ord == game.height-1;
     }
 
     @Override
     public void update() {
         timer++;
-        for (Lane ligne: road ){
-            ligne.update(timer);
+        for (Lane l: road ){
+            l.update(timer);
         }
     }
 }
