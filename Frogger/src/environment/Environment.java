@@ -14,7 +14,6 @@ public class Environment implements IEnvironment {
         this.game=game;
         this.road= new ArrayList<Lane>();
         this.road.add(new Game, new Case(game.width, game.height));
-
         for(int i=1; i<game.height; i++){
             this.road.add(new Lane(game, i)); // on va supposer que le constructeur Lane à été déclaré ici et en bas
         }
@@ -24,29 +23,18 @@ public class Environment implements IEnvironment {
 
     @Override
     public boolean isSafe(Case aCase) {
-        return false;
+       return road.get(aCase.ord).isSafe(aCase);
     }
 
     @Override
     public boolean isWinningPosition(Case aCase) {
-        return false;
-    }
-
-    @Override
-    public boolean isSafe(util.Case c) {
-        return false;
-    }
-
-    @Override
-    public boolean isWinningPosition(util.Case c) {
-        return false;
+        return aCase.ord == game.height-1;
     }
 
     @Override
     public void update() {
-
+        for (Lane parLigne: road ){
+            parLigne.update();
+        }
     }
-
-    private ArrayList<Lane> road;
-    private Game game;
 }
