@@ -9,15 +9,18 @@ import java.util.ArrayList;
 public class Environment implements IEnvironment {
     private ArrayList<Lane> road;
     private Game game;
+    private int timer;
 
     public Environment(Game game){
         this.game=game;
         this.road= new ArrayList<Lane>();
         this.road.add(new Lane(game, 0, 0));
         for(int i=1; i<game.height-1; i++){
-            this.road.add(new Lane(game, i)); // on va supposer que le constructeur Lane à été déclaré ici et en bas
+            this.road.add(new Lane(game, i));
         }
         this.road.add(new Lane(game,  game.height - 1, 0));
+        this.timer=0;
+        update(this.timer);
     }
 
 
@@ -33,8 +36,9 @@ public class Environment implements IEnvironment {
 
     @Override
     public void update() {
+        timer++;
         for (Lane parLigne: road ){
-            parLigne.update();
+            parLigne.update(timer);
         }
     }
 }
