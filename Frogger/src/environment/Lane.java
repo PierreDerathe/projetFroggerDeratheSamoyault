@@ -24,7 +24,6 @@ public class Lane {
 		moveCars(timer % speed == 0 );
 		removeOldCars();
 		mayAddCar();
-		}
 
 		// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
 		// d'horloge" �gal � leur vitesse
@@ -67,7 +66,11 @@ public class Lane {
 	}
 
 	public boolean isSafe(util.Case pos) {
-		return cars.get(cars.size()-1).coversCase(pos);
+		for (Car c :
+				cars) {
+			if (c.coversCase(pos)) return false;
+		}
+		return true;
 	}
 
 	private Case getFirstCase() {
