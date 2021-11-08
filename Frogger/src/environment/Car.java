@@ -9,8 +9,8 @@ import java.awt.*;
 public class Car {
 	private Game game;
 	private Case leftPosition;
-	private boolean leftToRight;
-	private int length = 2;
+	private final boolean leftToRight;
+	private final int length = 2;
 	private final Color colorLtR = Color.BLACK;
 	private final Color colorRtL = Color.BLUE;
 

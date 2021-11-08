@@ -39,8 +39,6 @@ public class Lane {
 
 	}
 
-	// TODO : ajout de methodes
-
 	private void moveCars(boolean b) {
 		if (b) for (Car car :
 				cars) {
