@@ -16,7 +16,7 @@ public class Lane {
 	public Lane(gameCommons.Game game, int ord, double density) {
 		this.game = game;
 		this.ord = ord;
-		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 1;
+		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 2;
 		this.leftToRight = game.randomGen.nextBoolean();
 		this.density = density;
 	}

@@ -28,14 +28,14 @@ public class Car {
 
 	public boolean appearsInBounds(){
 		addToGraphics();
-		return leftPosition.absc+length>=0 || leftPosition.absc<game.width;
+		return leftPosition.absc+length>=0 && leftPosition.absc<game.width;
 	}
 
 	public boolean coversCase(Case c){
-		if(c.ord != this.leftPosition.ord){
+		if(c.ord != leftPosition.ord){
 			return false;
 		}else{
-			return c.absc >= this.leftPosition.absc && c.absc < this.leftPosition.absc + this.length;
+			return c.absc >= leftPosition.absc && c.absc < leftPosition.absc + length;
 		}
 	}
 
