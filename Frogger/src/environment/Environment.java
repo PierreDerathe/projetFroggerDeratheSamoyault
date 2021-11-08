@@ -20,7 +20,7 @@ public class Environment implements IEnvironment {
         }
         this.road.add(new Lane(game,  game.height - 1, 0));
         this.timer=0;
-        update(this.timer);
+        update();
     }
 
 

@@ -12,13 +12,12 @@ public class Lane {
 	private ArrayList<Car> cars = new ArrayList<>();
 	private boolean leftToRight;
 	private double density;
-	private int timer;
 
 	public Lane(gameCommons.Game game, int ord, double density) { /* compiled code */ }
 
 	public Lane(gameCommons.Game game, int ord) { /* compiled code */ }
 
-	public void update() {
+	public void update(int timer) {
 
 		timer++;
 		moveCars(timer % speed == 0 );
@@ -87,6 +86,8 @@ public class Lane {
 			return new Case(game.width, ord);
 	}
 
-	public java.lang.String toString() { /* compiled code */ }
-
+	@Override
+	public String toString() {
+		return String.valueOf(cars.size());
+	}
 }
