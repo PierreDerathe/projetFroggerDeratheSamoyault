@@ -21,6 +21,10 @@ public class Game {
 	private IFrog frog;
 	private IFroggerGraphics graphic;
 
+	//Condition de victoire
+	public boolean win = false;
+	public boolean lose = false;
+
 	/**
 	 * 
 	 * @param graphic
@@ -98,8 +102,8 @@ public class Game {
 		graphic.clear();
 		environment.update();
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
-		testLose();
-		testWin();
+		if (testLose()) graphic.endGameScreen("Loser");
+		if(testWin()) graphic.endGameScreen("Winner");
 	}
 
 }

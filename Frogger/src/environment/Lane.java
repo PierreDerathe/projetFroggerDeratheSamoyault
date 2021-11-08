@@ -27,7 +27,6 @@ public class Lane {
 		moveCars(timer % speed == 0 );
 		removeOldCars();
 		mayAddCar();
-		System.out.println(this);
 
 		// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
 		// d'horloge" �gal � leur vitesse
