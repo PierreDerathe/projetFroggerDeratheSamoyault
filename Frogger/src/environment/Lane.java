@@ -9,20 +9,25 @@ public class Lane {
 	private Game game;
 	private int ord;
 	private int speed;
-	private ArrayList<Car> cars = new ArrayList<>();
 	private boolean leftToRight;
 	private double density;
+	private ArrayList<Car> cars = new ArrayList<>();
 
-	public Lane(gameCommons.Game game, int ord, double density) { /* compiled code */ }
+	public Lane(gameCommons.Game game, int ord, double density) {
+		this.game = game;
+		this.ord = ord;
+		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 1;
+		this.leftToRight = game.randomGen.nextBoolean();
+		this.density = density;
+	}
 
-	public Lane(gameCommons.Game game, int ord) { /* compiled code */ }
+	public Lane(gameCommons.Game game, int ord) { this(game, ord, game.defaultDensity); }
 
 	public void update(int timer) {
-
-		timer++;
 		moveCars(timer % speed == 0 );
 		removeOldCars();
 		mayAddCar();
+		System.out.println(this);
 
 		// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
 		// d'horloge" �gal � leur vitesse
@@ -45,7 +50,19 @@ public class Lane {
 	}
 
 	private void removeOldCars() {
-		while (!cars.get(0).appearsInBounds()) cars.remove(0);
+//		if(!cars.isEmpty())
+//			while (!cars.get(0).appearsInBounds())
+//				cars.remove(0);
+		ArrayList<Car> needDelete = new ArrayList<>();
+		for (Car c :
+				cars) {
+			if (!c.appearsInBounds())
+				needDelete.add(c);
+		}
+		for (Car c :
+				needDelete) {
+			cars.remove(c);
+		}
 	}
 
 	/*

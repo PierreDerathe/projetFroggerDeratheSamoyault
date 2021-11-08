@@ -20,7 +20,6 @@ public class Environment implements IEnvironment {
         }
         this.road.add(new Lane(game,  game.height - 1, 0));
         this.timer=0;
-        update();
     }
 
 
@@ -37,8 +36,8 @@ public class Environment implements IEnvironment {
     @Override
     public void update() {
         timer++;
-        for (Lane parLigne: road ){
-            parLigne.update(timer);
+        for (Lane ligne: road ){
+            ligne.update(timer);
         }
     }
 }
