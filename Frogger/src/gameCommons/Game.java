@@ -21,6 +21,9 @@ public class Game {
 	private IFrog frog;
 	private IFroggerGraphics graphic;
 
+	//Condition de victoire
+	private String time = "";
+
 	/**
 	 * 
 	 * @param graphic
@@ -95,11 +98,16 @@ public class Game {
 	 * partie.
 	 */
 	public void update() {
-		graphic.clear();
-		environment.update();
-		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
-		testLose();
-		testWin();
+		if (time == "") {
+			graphic.clear();
+
+			environment.update();
+			this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
+			if (testLose() || testWin()) {
+					time = String.valueOf(environment.getTimer());
+				graphic.endGameScreen((testWin() ? "Win" : "Lose") + " Temps : " + time);
+			}
+		}
 	}
 
 }

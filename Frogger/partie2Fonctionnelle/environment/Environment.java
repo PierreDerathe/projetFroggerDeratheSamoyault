@@ -19,8 +19,8 @@ public class Environment implements IEnvironment {
             this.road.add(new Lane(game, i));
         }
         this.road.add(new Lane(game,  game.height - 1, 0));
-        this.timer = -40;
-        for (int i = 0; i < 40; i++) {
+        this.timer=0;
+        for (int i = 0; i < 20; i++) {
             update();
         }
     }
@@ -41,17 +41,6 @@ public class Environment implements IEnvironment {
         timer++;
         for (Lane l: road ){
             l.update(timer);
-        }
-    }
-
-    @Override
-    public int getTimer(){ return timer; }
-
-    @Override
-    public void shiftForward(int n){
-        for (int i = 0; i < n; i++) {
-            road.remove(0);
-            road.add(new Lane());
         }
     }
 }

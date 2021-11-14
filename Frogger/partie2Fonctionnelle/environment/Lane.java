@@ -7,28 +7,21 @@ import java.util.ArrayList;
 
 public class Lane {
 	private Game game;
-	private Integer ord;
-	private final int speed;
-	private final boolean leftToRight;
-	private final double density;
+	private int ord;
+	private int speed;
+	private boolean leftToRight;
+	private double density;
 	private ArrayList<Car> cars = new ArrayList<>();
 
 	public Lane(gameCommons.Game game, int ord, double density) {
 		this.game = game;
 		this.ord = ord;
-		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 1;
+		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 2;
 		this.leftToRight = game.randomGen.nextBoolean();
 		this.density = density;
 	}
 
 	public Lane(gameCommons.Game game, int ord) { this(game, ord, game.defaultDensity); }
-
-	public Lane(gameCommons.Game game, int ord, int nbUpdate){
-		this(game, ord);
-		for (int i = 0; i < nbUpdate; i++) {
-			this.update(i);
-		}
-	}
 
 	public void update(int timer) {
 		moveCars(timer % speed == 0 );
@@ -54,6 +47,9 @@ public class Lane {
 	}
 
 	private void removeOldCars() {
+//		if(!cars.isEmpty())
+//			while (!cars.get(0).appearsInBounds())
+//				cars.remove(0);
 		ArrayList<Car> needDelete = new ArrayList<>();
 		for (Car c :
 				cars) {

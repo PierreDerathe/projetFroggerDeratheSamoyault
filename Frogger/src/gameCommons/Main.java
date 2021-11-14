@@ -1,14 +1,13 @@
 package gameCommons;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.Timer;
-
+import environment.Environment;
 import frog.Frog;
-import givenEnvironment.GivenEnvironment;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main {
 
@@ -19,7 +18,7 @@ public class Main {
 		int height = 20;
 		int tempo = 100;
 		int minSpeedInTimerLoops = 3;
-		double defaultDensity = 0.2;
+		double defaultDensity = 0.05;
 		
 		//Cr�ation de l'interface graphique
 		IFroggerGraphics graphic = new FroggerGraphic(width, height);

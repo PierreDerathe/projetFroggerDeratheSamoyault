@@ -5,11 +5,11 @@ import util.Case;
 public interface IEnvironment {
 
 	/**
-	 * Teste si une case est sure, c'est ‡ dire que la grenouille peut s'y poser
+	 * Teste si une case est sure, c'est ÔøΩ dire que la grenouille peut s'y poser
 	 * sans mourir
 	 * 
 	 * @param c
-	 *            la case ‡ tester
+	 *            la case ÔøΩ tester
 	 * @return vrai s'il n'y a pas danger
 	 */
 	public boolean isSafe(Case c);
@@ -23,8 +23,20 @@ public interface IEnvironment {
 	public boolean isWinningPosition(Case c);
 
 	/**
-	 * Effectue une Ètape d'actualisation de l'environnement
+	 * Effectue une ÔøΩtape d'actualisation de l'environnement
 	 */
 	public void update();
+
+	/**
+	 * @return Le nombre d'update depuis le d√©but d'une partie
+	 */
+	public int getTimer();
+
+	/**
+	 * @param n Le nombre de d√©calage
+	 * D√©cale l'environnement de n ligne vers le haut
+	 * et incr√©mente le d√©calage total de n
+	 */
+	public void shiftForward(int n);
 
 }
