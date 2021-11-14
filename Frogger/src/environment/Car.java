@@ -20,7 +20,12 @@ public class Car {
 		this.leftToRight=leftToRight;
 //		this.length=length;
 	}
-	
+
+	public Car(Game game, int absc, Integer ord, boolean leftToRight) {
+
+		this.leftToRight = leftToRight;
+	}
+
 	public void move(){
 		leftPosition = new Case(leftPosition.absc + (leftToRight ? 1 : (-1)), leftPosition.ord);/* si la voiture va vers la droite la vitesse est positive et négative dans l'autre cas */
 

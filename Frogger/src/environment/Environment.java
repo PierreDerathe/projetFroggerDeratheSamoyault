@@ -51,7 +51,11 @@ public class Environment implements IEnvironment {
     public void shiftForward(int n){
         for (int i = 0; i < n; i++) {
             road.remove(0);
-            road.add(new Lane());
+            road.add(new Lane(game));
+        }
+        for (Lane lane :
+                road) {
+            lane.setOrd(road.indexOf(lane));
         }
     }
 }

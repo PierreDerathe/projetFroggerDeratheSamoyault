@@ -30,6 +30,11 @@ public class Lane {
 		}
 	}
 
+	public Lane(gameCommons.Game game) {
+		this(game, 0, 40);
+		this.ord = null;
+	}
+
 	public void update(int timer) {
 		moveCars(timer % speed == 0 );
 		removeOldCars();
@@ -77,7 +82,7 @@ public class Lane {
 	private void mayAddCar() {
 		if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
 			if (game.randomGen.nextDouble() < density) {
-				cars.add(new Car(game, getBeforeFirstCase(), leftToRight/*, game.randomGen.nextInt(2)+1*/));
+				cars.add(new Car(game, getBeforeFirstCase().absc, ord, leftToRight));
 			}
 		}
 	}
@@ -102,6 +107,10 @@ public class Lane {
 			return new Case(-1, ord);
 		} else
 			return new Case(game.width, ord);
+	}
+
+	public void setOrd(int ord) {
+		this.ord = ord;
 	}
 
 	@Override
