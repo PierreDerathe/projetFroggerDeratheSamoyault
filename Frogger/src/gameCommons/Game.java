@@ -93,6 +93,10 @@ public class Game {
 		return environment.isWinningPosition(frog.getPosition());
 	}
 
+	private int testForward() {
+		return frog.getPosition().ord - height/3;
+	}
+
 	/**
 	 * Actualise l'environnement, affiche la grenouille et verifie la fin de
 	 * partie.
@@ -100,7 +104,7 @@ public class Game {
 	public void update() {
 		if (time == "") {
 			graphic.clear();
-
+			environment.shiftForward(testForward());
 			environment.update();
 			this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 			if (testLose() || testWin()) {
