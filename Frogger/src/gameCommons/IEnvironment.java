@@ -27,4 +27,6 @@ public interface IEnvironment {
 	 */
 	void update();
 
+	void shiftForward();
+
 }

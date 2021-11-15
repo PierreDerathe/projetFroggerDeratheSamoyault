@@ -43,4 +43,14 @@ public class Environment implements IEnvironment {
             l.update(timer);
         }
     }
+
+    @Override
+    public void shiftForward() {
+        road.remove(0);
+        road.add(new Lane(game, game.height));
+        for (Lane l :
+                road) {
+            l.moveOrd(-1);
+        }
+    }
 }

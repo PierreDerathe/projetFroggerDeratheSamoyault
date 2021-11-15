@@ -45,6 +45,14 @@ public class Lane {
 			car.moveAbs();
 		}
 	}
+	
+	public void moveOrd(int n) {
+		ord += n;
+		for (Car c :
+				cars) {
+			moveOrd(n);
+		}
+	}
 
 	private void removeOldCars() {
 //		if(!cars.isEmpty())

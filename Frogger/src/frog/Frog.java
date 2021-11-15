@@ -39,6 +39,7 @@ public class Frog implements IFrog {
 			position = pos;
 			direction = key;
 		}
+		if (position.ord > game.height/3) game.ShiftForward();
 	}
 
 }

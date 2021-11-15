@@ -5,6 +5,7 @@ import java.util.Random;
 
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
+import util.Direction;
 
 public class Game {
 
@@ -22,6 +23,7 @@ public class Game {
 	private IFroggerGraphics graphic;
 
 	//Condition de victoire
+	private int score = 0;
 
 	/**
 	 * 
@@ -80,6 +82,12 @@ public class Game {
 	public boolean testLose() {
 		return !environment.isSafe(frog.getPosition());
 
+	}
+
+	public void ShiftForward() {
+		frog.move(Direction.down);
+		environment.shiftForward();
+		score++;
 	}
 
 	/**
