@@ -6,28 +6,19 @@ import graphicalElements.Element;
 
 import java.awt.*;
 
-public class Car {
-	private Game game;
-	private Case leftPosition;
+public class Car extends CaseEvent {
 	private final boolean leftToRight;
-	private final int length = 2;
 	private final Color colorLtR = Color.BLACK;
 	private final Color colorRtL = Color.BLUE;
-	private final Color caseSpe = Color.DARK_GRAY;
 
-	public Car(Game game, Case leftPosition, boolean leftToRight/*, int length*/){
-		this.game= game;
-		this.leftPosition=leftPosition;
+	public Car(Game game, Case leftPosition, boolean leftToRight){
+		super(game, leftPosition);
 		this.leftToRight=leftToRight;
-//		this.length=length;
+		this.length = 2;
 	}
 	
 	public void moveAbs(){
-		leftPosition = new Case(leftPosition.absc + (leftToRight ? 1 : (-1)), leftPosition.ord);/* si la voiture va vers la droite la vitesse est positive et négative dans l'autre cas */
-	}
-
-	public void moveOrd(int n) {
-		leftPosition = new Case(leftPosition.absc, leftPosition.ord + n);
+		leftPosition = new Case(leftPosition.absc + (leftToRight ? 1 : (-1)), leftPosition.ord);
 	}
 
 	public boolean appearsInBounds(){

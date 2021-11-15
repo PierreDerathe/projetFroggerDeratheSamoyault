@@ -19,6 +19,9 @@ public class Lane {
 		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 2;
 		this.leftToRight = game.randomGen.nextBoolean();
 		this.density = density;
+		for (int i = 0; i < 40; i++) {
+			update(i);
+		}
 	}
 
 	public Lane(gameCommons.Game game, int ord) { this(game, ord, game.defaultDensity); }
@@ -80,7 +83,7 @@ public class Lane {
 	private void mayAddCar() {
 		if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
 			if (game.randomGen.nextDouble() < density) {
-				cars.add(new Car(game, getBeforeFirstCase(), leftToRight/*, game.randomGen.nextInt(2)+1*/));
+				cars.add(new Car(game, getBeforeFirstCase(), leftToRight));
 			}
 		}
 	}

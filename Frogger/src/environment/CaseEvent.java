@@ -5,15 +5,13 @@ import graphicalElements.Element;
 import util.Case;
 
 public class CaseEvent {
-    private Case leftPosition;
-    private final int length =1;
-    private Game game;
-    private Element elem;
+    protected Case leftPosition;
+    protected int length = 1;
+    protected Game game;
 
-    public CaseEvent(Case leftPosition, Game game, Element elem) {
+    public CaseEvent(Game game, Case leftPosition) {
         this.leftPosition = leftPosition;
         this.game = game;
-        this.elem = elem;
     }
     public void moveAbs(int n) { leftPosition = new Case(leftPosition.absc + n, leftPosition.ord); }
     public void moveOrd(int n) {

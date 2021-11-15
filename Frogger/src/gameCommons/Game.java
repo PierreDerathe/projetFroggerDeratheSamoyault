@@ -24,6 +24,7 @@ public class Game {
 
 	//Condition de victoire
 	private int score = 0;
+	private String timer;
 
 	/**
 	 * 
@@ -105,10 +106,15 @@ public class Game {
 	 * partie.
 	 */
 	public void update() {
-		graphic.clear();
-		environment.update();
-		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
-		if (testLose()) graphic.endGameScreen("Score : " + score);
+		if (timer == null) {
+			graphic.clear();
+			environment.update();
+			this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
+			if (testLose()) {
+				timer = String.valueOf(environment.getTimer());
+				graphic.endGameScreen("Score : " + score + " Temps : " + timer);
+			}
+		}
 	}
 
 }

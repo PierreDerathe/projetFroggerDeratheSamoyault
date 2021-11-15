@@ -29,4 +29,6 @@ public interface IEnvironment {
 
 	void shiftForward();
 
+	int getTimer();
+
 }

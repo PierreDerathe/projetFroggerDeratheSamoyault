@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Environment implements IEnvironment {
     private ArrayList<Lane> road;
     private Game game;
-    public int timer;
+    public int timer = 0;
 
     public Environment(Game game){
         this.game=game;
@@ -19,10 +19,6 @@ public class Environment implements IEnvironment {
             this.road.add(new Lane(game, i));
         }
         this.road.add(new Lane(game,  game.height - 1, 0));
-        this.timer=0;
-        for (int i = 0; i < 20; i++) {
-            update();
-        }
     }
 
 
@@ -52,5 +48,10 @@ public class Environment implements IEnvironment {
                 road) {
             l.moveOrd(-1);
         }
+    }
+
+    @Override
+    public int getTimer() {
+        return timer;
     }
 }
