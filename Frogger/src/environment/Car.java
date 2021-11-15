@@ -13,6 +13,7 @@ public class Car {
 	private final int length = 2;
 	private final Color colorLtR = Color.BLACK;
 	private final Color colorRtL = Color.BLUE;
+	private final Color caseSpe = Color.DARK_GRAY;
 
 	public Car(Game game, Case leftPosition, boolean leftToRight/*, int length*/){
 		this.game= game;
