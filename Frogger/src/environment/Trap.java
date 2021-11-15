@@ -10,7 +10,4 @@ public class Trap extends CaseEvent{
         super(game, leftPosition);
     }
 
-    public void caseBonus(Case c){
-
-    }
 }
