@@ -2,10 +2,10 @@ package graphicalElements;
 
 import java.awt.*;
 
-import util.Case;
+import util.Position;
 
 
-public class Element extends Case {
+public class Element extends Position {
     public final Color color;
 
     public Element(int absc, int ord, Color color) {
@@ -13,7 +13,7 @@ public class Element extends Case {
         this.color = color;
     }
     
-    public Element(Case c, Color color) {
+    public Element(Position c, Color color) {
         super(c.absc, c.ord);
         this.color = color;
     }

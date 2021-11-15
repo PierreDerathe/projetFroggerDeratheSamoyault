@@ -2,7 +2,7 @@ package environment;
 
 import gameCommons.Game;
 import gameCommons.IEnvironment;
-import util.Case;
+import util.Position;
 
 import java.util.ArrayList;
 
@@ -27,12 +27,12 @@ public class Environment implements IEnvironment {
 
 
     @Override
-    public boolean isSafe(Case c) {
+    public boolean isSafe(Position c) {
        return road.get(c.ord).isSafe(c);
     }
 
     @Override
-    public boolean isWinningPosition(Case c) {
+    public boolean isWinningPosition(Position c) {
         return c.ord == game.height-1;
     }
 
@@ -51,7 +51,11 @@ public class Environment implements IEnvironment {
     public void shiftForward(int n){
         for (int i = 0; i < n; i++) {
             road.remove(0);
-            road.add(new Lane());
+            road.add(new Lane(game));
+        }
+        for (Lane lane :
+                road) {
+            lane.setOrd(road.indexOf(lane));
         }
     }
 }

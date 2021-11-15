@@ -1,6 +1,6 @@
 package gameCommons;
 
-import util.Case;
+import util.Position;
 
 public interface IEnvironment {
 
@@ -12,7 +12,7 @@ public interface IEnvironment {
 	 *            la case � tester
 	 * @return vrai s'il n'y a pas danger
 	 */
-	public boolean isSafe(Case c);
+	public boolean isSafe(Position c);
 
 	/**
 	 * Teste si la case est une case d'arrivee
@@ -20,7 +20,7 @@ public interface IEnvironment {
 	 * @param c
 	 * @return vrai si la case est une case de victoire
 	 */
-	public boolean isWinningPosition(Case c);
+	public boolean isWinningPosition(Position c);
 
 	/**
 	 * Effectue une �tape d'actualisation de l'environnement

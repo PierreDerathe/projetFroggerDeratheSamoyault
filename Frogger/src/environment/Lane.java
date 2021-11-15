@@ -1,6 +1,6 @@
 package environment;
 
-import util.Case;
+import util.Position;
 import gameCommons.Game;
 
 import java.util.ArrayList;
@@ -30,6 +30,11 @@ public class Lane {
 		}
 	}
 
+	public Lane(Game game){
+		this(game, 0, 40);
+		ord = null;
+	}
+
 	public void update(int timer) {
 		moveCars(timer % speed == 0 );
 		removeOldCars();
@@ -44,6 +49,10 @@ public class Lane {
 
 		// A chaque tic d'horloge, une voiture peut �tre ajout�e
 
+	}
+
+	public void setOrd(int ord) {
+		this.ord = Integer.valueOf(ord);
 	}
 
 	private void moveCars(boolean b) {
@@ -82,7 +91,7 @@ public class Lane {
 		}
 	}
 
-	public boolean isSafe(util.Case pos) {
+	public boolean isSafe(util.Position pos) {
 		for (Car c :
 				cars) {
 			if (c.coversCase(pos)) return false;
@@ -90,18 +99,18 @@ public class Lane {
 		return true;
 	}
 
-	private Case getFirstCase() {
+	private Position getFirstCase() {
 		if (leftToRight) {
-			return new Case(0, ord);
+			return new Position(0, ord);
 		} else
-			return new Case(game.width - 1, ord);
+			return new Position(game.width - 1, ord);
 	}
 
-	private Case getBeforeFirstCase() {
-		if (leftToRight) {
-			return new Case(-1, ord);
-		} else
-			return new Case(game.width, ord);
+	private Position getBeforeFirstCase() {
+		if (leftToRight)
+			return new Position(-1, ord);
+		else
+			return new Position(game.width, ord);
 	}
 
 	@Override
