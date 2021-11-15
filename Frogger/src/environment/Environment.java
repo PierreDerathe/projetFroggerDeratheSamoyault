@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Environment implements IEnvironment {
     private ArrayList<Lane> road;
     private Game game;
-    private int timer;
+    public int timer;
 
     public Environment(Game game){
         this.game=game;

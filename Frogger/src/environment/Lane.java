@@ -48,9 +48,8 @@ public class Lane {
 	
 	public void moveOrd(int n) {
 		ord += n;
-		for (Car c :
-				cars) {
-			moveOrd(n);
+		for (Car c : cars) {
+			c.moveOrd(n);
 		}
 	}
 

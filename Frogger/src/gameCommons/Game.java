@@ -108,8 +108,7 @@ public class Game {
 		graphic.clear();
 		environment.update();
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
-		if (testLose()) graphic.endGameScreen("Loser");
-		if(testWin()) graphic.endGameScreen("Winner");
+		if (testLose()) graphic.endGameScreen("Score : " + score);
 	}
 
 }
