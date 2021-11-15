@@ -1,9 +1,13 @@
 package gameCommons;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Random;
 
+import environment.Environment;
+import frog.Frog;
 import graphicalElements.Element;
+import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
 import util.Direction;
 
@@ -23,8 +27,10 @@ public class Game {
 	private IFroggerGraphics graphic;
 
 	//Condition de victoire
-	private int score = 0;
+	private Integer score = 0;
 	private String timer;
+	private ArrayList<Integer> tabScore = new ArrayList<>();
+	private int relaunch = 0;
 
 	/**
 	 * 
@@ -101,6 +107,8 @@ public class Game {
 		return environment.isWinningPosition(frog.getPosition());
 	}
 
+	public String getTimer() { return timer; }
+
 	/**
 	 * Actualise l'environnement, affiche la grenouille et verifie la fin de
 	 * partie.
@@ -115,6 +123,22 @@ public class Game {
 				graphic.endGameScreen("Score : " + score + " Temps : " + timer);
 			}
 		}
+	}
+
+	public void rewind() {
+		//Cr�ation de l'interface graphique
+		IFroggerGraphics graphic = new FroggerGraphic(width, height);
+		//Cr�ation et liason de la grenouille
+		IFrog frog = new Frog(this);
+		this.setFrog(frog);
+		graphic.setFrog(frog);
+		//Cr�ation et liaison de l'environnement
+		IEnvironment env = new Environment(this);
+		this.setEnvironment(env);
+		timer = null;
+		tabScore.add(score);
+		System.out.println(score);
+		score = 0;
 	}
 
 }

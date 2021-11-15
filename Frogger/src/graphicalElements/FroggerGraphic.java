@@ -62,6 +62,9 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 			break;
 		case KeyEvent.VK_RIGHT:
 			frog.move(Direction.right);
+			break;
+		case KeyEvent.VK_SPACE:
+			frog.rewind();
 		}
 	}
 
