@@ -1,39 +1,27 @@
 package environment;
 
-import util.Position;
+import util.Case;
 import gameCommons.Game;
 
 import java.util.ArrayList;
 
 public class Lane {
 	private Game game;
-	private Integer ord;
-	private final int speed;
-	private final boolean leftToRight;
-	private final double density;
+	private int ord;
+	private int speed;
+	private boolean leftToRight;
+	private double density;
 	private ArrayList<Car> cars = new ArrayList<>();
 
 	public Lane(gameCommons.Game game, int ord, double density) {
 		this.game = game;
 		this.ord = ord;
-		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 1;
+		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 2;
 		this.leftToRight = game.randomGen.nextBoolean();
 		this.density = density;
 	}
 
 	public Lane(gameCommons.Game game, int ord) { this(game, ord, game.defaultDensity); }
-
-	public Lane(gameCommons.Game game, int ord, int nbUpdate){
-		this(game, ord);
-		for (int i = 0; i < nbUpdate; i++) {
-			this.update(i);
-		}
-	}
-
-	public Lane(Game game){
-		this(game, 0, 40);
-		ord = null;
-	}
 
 	public void update(int timer) {
 		moveCars(timer % speed == 0 );
@@ -51,18 +39,17 @@ public class Lane {
 
 	}
 
-	public void setOrd(int ord) {
-		this.ord = Integer.valueOf(ord);
-	}
-
 	private void moveCars(boolean b) {
 		if (b) for (Car car :
 				cars) {
-			car.move();
+			car.moveAbs();
 		}
 	}
 
 	private void removeOldCars() {
+//		if(!cars.isEmpty())
+//			while (!cars.get(0).appearsInBounds())
+//				cars.remove(0);
 		ArrayList<Car> needDelete = new ArrayList<>();
 		for (Car c :
 				cars) {
@@ -91,7 +78,7 @@ public class Lane {
 		}
 	}
 
-	public boolean isSafe(util.Position pos) {
+	public boolean isSafe(util.Case pos) {
 		for (Car c :
 				cars) {
 			if (c.coversCase(pos)) return false;
@@ -99,18 +86,18 @@ public class Lane {
 		return true;
 	}
 
-	private Position getFirstCase() {
+	private Case getFirstCase() {
 		if (leftToRight) {
-			return new Position(0, ord);
+			return new Case(0, ord);
 		} else
-			return new Position(game.width - 1, ord);
+			return new Case(game.width - 1, ord);
 	}
 
-	private Position getBeforeFirstCase() {
-		if (leftToRight)
-			return new Position(-1, ord);
-		else
-			return new Position(game.width, ord);
+	private Case getBeforeFirstCase() {
+		if (leftToRight) {
+			return new Case(-1, ord);
+		} else
+			return new Case(game.width, ord);
 	}
 
 	@Override

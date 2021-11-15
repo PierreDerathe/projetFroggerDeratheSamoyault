@@ -1,6 +1,6 @@
 package environment;
 
-import util.Position;
+import util.Case;
 import gameCommons.Game;
 import graphicalElements.Element;
 
@@ -8,27 +8,25 @@ import java.awt.*;
 
 public class Car {
 	private Game game;
-	private Position leftPosition;
+	private Case leftPosition;
 	private final boolean leftToRight;
 	private final int length = 2;
 	private final Color colorLtR = Color.BLACK;
 	private final Color colorRtL = Color.BLUE;
 
-	public Car(Game game, Position leftPosition, boolean leftToRight/*, int length*/){
+	public Car(Game game, Case leftPosition, boolean leftToRight/*, int length*/){
 		this.game= game;
 		this.leftPosition=leftPosition;
 		this.leftToRight=leftToRight;
 //		this.length=length;
 	}
-
-	public Car(Game game, int absc, Integer ord, boolean leftToRight) {
-
-		this.leftToRight = leftToRight;
+	
+	public void moveAbs(){
+		leftPosition = new Case(leftPosition.absc + (leftToRight ? 1 : (-1)), leftPosition.ord);/* si la voiture va vers la droite la vitesse est positive et négative dans l'autre cas */
 	}
 
-	public void move(){
-		leftPosition = new Position(leftPosition.absc + (leftToRight ? 1 : (-1)), leftPosition.ord);/* si la voiture va vers la droite la vitesse est positive et négative dans l'autre cas */
-
+	public void moveOrd(int n) {
+		leftPosition = new Case(leftPosition.absc, leftPosition.ord + n);
 	}
 
 	public boolean appearsInBounds(){
@@ -36,7 +34,7 @@ public class Car {
 		return leftPosition.absc+length>=0 && leftPosition.absc<game.width; // Confusion entre && et ||
 	}
 
-	public boolean coversCase(Position c){
+	public boolean coversCase(Case c){
 		if(c.ord != leftPosition.ord){
 			return false;
 		}else{

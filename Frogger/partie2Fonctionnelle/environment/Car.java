@@ -9,8 +9,8 @@ import java.awt.*;
 public class Car {
 	private Game game;
 	private Case leftPosition;
-	private boolean leftToRight;
-	private int length = 2;
+	private final boolean leftToRight;
+	private final int length = 2;
 	private final Color colorLtR = Color.BLACK;
 	private final Color colorRtL = Color.BLUE;
 
@@ -21,9 +21,12 @@ public class Car {
 //		this.length=length;
 	}
 	
-	public void move(){
+	public void moveAbs(){
 		leftPosition = new Case(leftPosition.absc + (leftToRight ? 1 : (-1)), leftPosition.ord);/* si la voiture va vers la droite la vitesse est positive et négative dans l'autre cas */
+	}
 
+	public void moveOrd(int n) {
+		leftPosition = new Case(leftPosition.absc, leftPosition.ord + n);
 	}
 
 	public boolean appearsInBounds(){

@@ -42,7 +42,7 @@ public class Lane {
 	private void moveCars(boolean b) {
 		if (b) for (Car car :
 				cars) {
-			car.move();
+			car.moveAbs();
 		}
 	}
 

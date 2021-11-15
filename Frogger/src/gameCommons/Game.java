@@ -22,7 +22,6 @@ public class Game {
 	private IFroggerGraphics graphic;
 
 	//Condition de victoire
-	private String time = "";
 
 	/**
 	 * 
@@ -49,7 +48,7 @@ public class Game {
 	/**
 	 * Lie l'objet frog � la partie
 	 * 
-	 * @param frog
+	 * @param frog la grenouille jouée
 	 */
 	public void setFrog(IFrog frog) {
 		this.frog = frog;
@@ -58,7 +57,7 @@ public class Game {
 	/**
 	 * Lie l'objet environment a la partie
 	 * 
-	 * @param environment
+	 * @param environment de jeu
 	 */
 	public void setEnvironment(IEnvironment environment) {
 		this.environment = environment;
@@ -93,25 +92,16 @@ public class Game {
 		return environment.isWinningPosition(frog.getPosition());
 	}
 
-	private int testForward() {
-		return frog.getPosition().ord - height/3;
-	}
-
 	/**
 	 * Actualise l'environnement, affiche la grenouille et verifie la fin de
 	 * partie.
 	 */
 	public void update() {
-		if (time == "") {
-			graphic.clear();
-			environment.shiftForward(testForward());
-			environment.update();
-			this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
-			if (testLose() || testWin()) {
-					time = String.valueOf(environment.getTimer());
-				graphic.endGameScreen((testWin() ? "Win" : "Lose") + " Temps : " + time);
-			}
-		}
+		graphic.clear();
+		environment.update();
+		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
+		if (testLose()) graphic.endGameScreen("Loser");
+		if(testWin()) graphic.endGameScreen("Winner");
 	}
 
 }

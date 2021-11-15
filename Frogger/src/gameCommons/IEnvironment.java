@@ -1,6 +1,6 @@
 package gameCommons;
 
-import util.Position;
+import util.Case;
 
 public interface IEnvironment {
 
@@ -12,31 +12,19 @@ public interface IEnvironment {
 	 *            la case � tester
 	 * @return vrai s'il n'y a pas danger
 	 */
-	public boolean isSafe(Position c);
+	boolean isSafe(Case c);
 
 	/**
 	 * Teste si la case est une case d'arrivee
 	 * 
-	 * @param c
+	 * @param c la case à tester
 	 * @return vrai si la case est une case de victoire
 	 */
-	public boolean isWinningPosition(Position c);
+	boolean isWinningPosition(Case c);
 
 	/**
 	 * Effectue une �tape d'actualisation de l'environnement
 	 */
-	public void update();
-
-	/**
-	 * @return Le nombre d'update depuis le début d'une partie
-	 */
-	public int getTimer();
-
-	/**
-	 * @param n Le nombre de décalage
-	 * Décale l'environnement de n ligne vers le haut
-	 * et incrémente le décalage total de n
-	 */
-	public void shiftForward(int n);
+	void update();
 
 }
