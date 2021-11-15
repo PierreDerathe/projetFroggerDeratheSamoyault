@@ -54,4 +54,12 @@ public class Environment implements IEnvironment {
     public int getTimer() {
         return timer;
     }
+
+    public boolean donneScoreAGame(Case c){
+        for(Lane l: road){
+            if(!l.donneScoreAEnvironment(c)){
+                return false;
+            }
+        }return true;
+    }
 }

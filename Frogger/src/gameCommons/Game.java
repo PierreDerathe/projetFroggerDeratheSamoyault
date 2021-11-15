@@ -1,11 +1,12 @@
 package gameCommons;
 
-import java.awt.Color;
-import java.util.Random;
-
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
+import util.Case;
 import util.Direction;
+
+import java.awt.*;
+import java.util.Random;
 
 public class Game {
 
@@ -115,6 +116,9 @@ public class Game {
 				graphic.endGameScreen("Score : " + score + " Temps : " + timer);
 			}
 		}
+	}
+	public void recoitBonus(Case c){
+		if(environment.donneScoreAGame(frog.getPosition())) score += 5;
 	}
 
 }

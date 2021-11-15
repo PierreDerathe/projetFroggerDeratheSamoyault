@@ -12,6 +12,7 @@ public class Lane {
 	private boolean leftToRight;
 	private double density;
 	private ArrayList<Car> cars = new ArrayList<>();
+	private ArrayList<Trap>listPiege;
 
 	public Lane(gameCommons.Game game, int ord, double density) {
 		this.game = game;
@@ -113,5 +114,15 @@ public class Lane {
 	@Override
 	public String toString() {
 		return String.valueOf(cars.size());
+	}
+
+
+	public boolean donneScoreAEnvironment(Case c) {
+		for (Trap p : listPiege) {
+			if (!isSafe(c)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
