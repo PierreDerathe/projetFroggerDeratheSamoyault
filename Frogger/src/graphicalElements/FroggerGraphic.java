@@ -21,7 +21,7 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 	public FroggerGraphic(int width, int height) {
 		this.width = width;
 		this.height = height;
-		elementsToDisplay = new ArrayList<Element>();
+		elementsToDisplay = new ArrayList<>();
 
 		setBackground(Color.GRAY);
 		setPreferredSize(new Dimension(width * pixelByCase, height * pixelByCase));
@@ -33,6 +33,18 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 		frame.pack();
 		frame.setVisible(true);
 		frame.addKeyListener(this);
+	}
+
+	public void reset(){
+		elementsToDisplay.clear();
+
+		setBackground(Color.GRAY);
+		setPreferredSize(new Dimension(width * pixelByCase, height * pixelByCase));
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().add(this);
+		frame.pack();
+		frame.setVisible(true);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -64,7 +76,7 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 			frog.move(Direction.right);
 			break;
 		case KeyEvent.VK_SPACE:
-			frog.rewind();
+			frog.launchReset();
 		}
 	}
 

@@ -5,8 +5,6 @@ import gameCommons.IFrog;
 import util.Case;
 import util.Direction;
 
-import javax.swing.text.Position;
-
 public class Frog implements IFrog {
 	
 	private Game game;
@@ -42,6 +40,6 @@ public class Frog implements IFrog {
 		if (position.ord > game.height/3) game.ShiftForward();
 	}
 
-	public void rewind() { game.rewind(); }
+	public void launchReset() { game.launchReset(); }
 
 }

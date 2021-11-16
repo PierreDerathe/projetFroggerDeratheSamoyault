@@ -38,7 +38,19 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				game.update();
 				graphic.repaint();
-				if(game.getTempsDeJeu() != null) game.rewind();
+				if(game.getTempsDeJeu().equals("C'est repartie")) {
+					//Cr�ation de l'interface graphique
+					graphic.reset();
+					//Cr�ation de la partie
+					//Cr�ation et liason de la grenouille
+					IFrog frog = new Frog(game);
+					game.setFrog(frog);
+					graphic.setFrog(frog);
+					//Cr�ation et liaison de l'environnement
+					IEnvironment env = new Environment(game);
+					game.setEnvironment(env);
+					game.reset();
+				}
 			}
 		});
 		timer.setInitialDelay(0);

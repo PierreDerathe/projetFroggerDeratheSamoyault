@@ -129,16 +129,9 @@ public class Game {
 		}
 	}
 
-	public void rewind() {
-		//Cr�ation de l'interface graphique
-		IFroggerGraphics graphic = new FroggerGraphic(width, height);
-		//Cr�ation et liason de la grenouille
-		IFrog frog = new Frog(this);
-		this.setFrog(frog);
-		graphic.setFrog(frog);
-		//Cr�ation et liaison de l'environnement
-		IEnvironment env = new Environment(this);
-		this.setEnvironment(env);
+	public void launchReset() { tempsDeJeu = "C'est repartie";}
+
+	public void reset() {
 		tempsDeJeu = null;
 		tabScore.add(score);
 		System.out.println(score);

@@ -23,6 +23,6 @@ public interface IFrog {
 	 */
 	void move(Direction key);
 
-	void rewind();
+	void launchReset();
 
 }
