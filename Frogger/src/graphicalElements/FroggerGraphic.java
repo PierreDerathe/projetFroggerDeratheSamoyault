@@ -98,6 +98,7 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 		label.setFont(new Font("Verdana", 1, 20));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setSize(this.getSize());
+		frame.getContentPane().removeAll();
 		frame.getContentPane().add(label);
 		frame.repaint();
 
