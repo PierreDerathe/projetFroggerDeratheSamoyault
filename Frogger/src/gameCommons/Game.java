@@ -1,6 +1,8 @@
 package gameCommons;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,6 +12,8 @@ import graphicalElements.Element;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
 import util.Direction;
+
+import javax.swing.*;
 
 public class Game {
 
@@ -28,7 +32,7 @@ public class Game {
 
 	//Condition de victoire
 	private Integer score = 0;
-	private String timer;
+	private String tempsDeJeu;
 	private ArrayList<Integer> tabScore = new ArrayList<>();
 	private int relaunch = 0;
 
@@ -41,7 +45,7 @@ public class Game {
 	 * @param height
 	 *            hauteur en cases
 	 * @param minSpeedInTimerLoop
-	 *            Vitesse minimale, en nombre de tour de timer avant d�placement
+	 *            Vitesse minimale, en nombre de tour de tempsDeJeu avant d�placement
 	 * @param defaultDensity
 	 *            densite de voiture utilisee par defaut pour les routes
 	 */
@@ -107,20 +111,20 @@ public class Game {
 		return environment.isWinningPosition(frog.getPosition());
 	}
 
-	public String getTimer() { return timer; }
+	public String getTempsDeJeu() { return tempsDeJeu; }
 
 	/**
 	 * Actualise l'environnement, affiche la grenouille et verifie la fin de
 	 * partie.
 	 */
 	public void update() {
-		if (timer == null) {
+		if (tempsDeJeu == null) {
 			graphic.clear();
 			environment.update();
 			this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 			if (testLose()) {
-				timer = String.valueOf(environment.getTimer());
-				graphic.endGameScreen("Score : " + score + " Temps : " + timer);
+				tempsDeJeu = String.valueOf(environment.getTimer());
+				graphic.endGameScreen("Score : " + score + " Temps : " + tempsDeJeu);
 			}
 		}
 	}
@@ -135,10 +139,11 @@ public class Game {
 		//Cr�ation et liaison de l'environnement
 		IEnvironment env = new Environment(this);
 		this.setEnvironment(env);
-		timer = null;
+		tempsDeJeu = null;
 		tabScore.add(score);
 		System.out.println(score);
 		score = 0;
+
 	}
 
 }

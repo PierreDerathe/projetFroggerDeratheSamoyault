@@ -38,6 +38,7 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				game.update();
 				graphic.repaint();
+				if(game.getTempsDeJeu() != null) game.rewind();
 			}
 		});
 		timer.setInitialDelay(0);
