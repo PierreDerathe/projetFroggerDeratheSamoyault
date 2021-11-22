@@ -117,12 +117,12 @@ public class Lane {
 	}
 
 
-	public boolean donneScoreAEnvironment(Case c) {
-		for (Trap p : listPiege) {
-			if (!isSafe(c)) {
-				return false;
+	public int isOnTrap(Case c) {
+		for (Trap trap : listPiege) {
+			if (trap.coversCase(c)) {
+				return trap.getType();
 			}
 		}
-		return true;
+		return -1;
 	}
 }

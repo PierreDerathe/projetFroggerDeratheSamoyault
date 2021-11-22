@@ -55,11 +55,12 @@ public class Environment implements IEnvironment {
         return timer;
     }
 
-    public boolean donneScoreAGame(Case c){
+    public int isOnTrap(Case c){
+        int tmp;
         for(Lane l: road){
-            if(!l.donneScoreAEnvironment(c)){
-                return false;
-            }
-        }return true;
+            tmp = l.isOnTrap(c);
+            if(tmp != -1) return tmp;
+        }
+        return -1;
     }
 }

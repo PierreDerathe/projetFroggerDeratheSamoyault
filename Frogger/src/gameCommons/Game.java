@@ -1,19 +1,12 @@
 package gameCommons;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-import environment.Environment;
-import frog.Frog;
 import graphicalElements.Element;
-import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
 import util.Direction;
-
-import javax.swing.*;
 
 public class Game {
 
@@ -92,7 +85,14 @@ public class Game {
 	 */
 	public boolean testLose() {
 		return !environment.isSafe(frog.getPosition());
+	}
 
+	public void testTrap() {
+		switch (environment.isOnTrap(frog.getPosition())) {
+			case 0 : endGame(); break;
+			case 1 : frog.move(Direction.up); break;
+			case 2 : score += 3;
+		}
 	}
 
 	public void ShiftForward() {
@@ -113,6 +113,11 @@ public class Game {
 
 	public String getTempsDeJeu() { return tempsDeJeu; }
 
+	public void endGame() {
+		tempsDeJeu = String.valueOf(environment.getTimer());
+		graphic.endGameScreen("Score : " + score + " Temps : " + tempsDeJeu);
+	}
+
 	/**
 	 * Actualise l'environnement, affiche la grenouille et verifie la fin de
 	 * partie.
@@ -123,8 +128,7 @@ public class Game {
 			environment.update();
 			this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 			if (testLose()) {
-				tempsDeJeu = String.valueOf(environment.getTimer());
-				graphic.endGameScreen("Score : " + score + " Temps : " + tempsDeJeu);
+				endGame();
 			}
 		}
 	}

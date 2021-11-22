@@ -31,5 +31,5 @@ public interface IEnvironment {
 
 	int getTimer();
 
-	boolean donneScoreAGame(Case c);
+	int isOnTrap(Case c);
 }
