@@ -24,5 +24,4 @@ public interface IFrog {
 	void move(Direction key);
 
 	void launchReset();
-
 }

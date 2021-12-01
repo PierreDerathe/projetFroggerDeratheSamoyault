@@ -1,13 +1,14 @@
 package graphicalElements;
 
-import javax.swing.*;
-
 import gameCommons.IFrog;
 import util.Direction;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+
 import java.util.ArrayList;
 
 public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListener {
@@ -17,6 +18,22 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 	private int height;
 	private IFrog frog;
 	private JFrame frame;
+
+	private int timeLeft = 60;
+
+	private String bestScoreFileName = "BestScore.txt";
+	private int score = 0;
+	private int bestScore = 0;
+
+	private String optionsFileName = "Options.txt";
+
+	BufferedImage colorLane = null;
+	BufferedImage colorRoad = null;
+
+	JTextField field = new JTextField();
+	JTextField timeField = new JTextField();
+
+
 
 	public FroggerGraphic(int width, int height) {
 		this.width = width;
@@ -28,11 +45,15 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 
 		JFrame frame = new JFrame("Frogger");
 		this.frame = frame;
+
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(this);
 		frame.pack();
 		frame.setVisible(true);
 		frame.addKeyListener(this);
+
+
 	}
 
 	public void reset(){
@@ -49,9 +70,18 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+
+		//on essaye de mettre un meilleur rendu graphique
+		Graphics2D newGraphism = (Graphics2D) g;
+		for (int i = 0; i < height; i++) {
+			newGraphism.drawImage(colorRoad, 0, i * pixelByCase, 26 * pixelByCase, pixelByCase, null);
+		}
+		newGraphism.drawImage(colorLane, 0, (height - 1) * pixelByCase, 26 * pixelByCase, pixelByCase, null);
 		for (Element e : elementsToDisplay) {
 			g.setColor(e.color);
 			g.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
+			Graphics2D newG= (Graphics2D) g;
+			//newG.drawImage(e.sprite, pixelByCase*e.absc,pixelByCase*(height-1-e.ord), pixelByCase, pixelByCase,null);
 		}
 	}
 
@@ -83,6 +113,7 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 	public void clear() {
 		this.elementsToDisplay.clear();
 	}
+
 
 	public void add(Element e) {
 		this.elementsToDisplay.add(e);

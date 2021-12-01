@@ -1,12 +1,12 @@
 package gameCommons;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Random;
-
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
 import util.Direction;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
 
@@ -23,6 +23,7 @@ public class Game {
 	private IFrog frog;
 	private IFroggerGraphics graphic;
 
+
 	//Condition de victoire
 	private Integer score = 0;
 	private String tempsDeJeu;
@@ -30,18 +31,16 @@ public class Game {
 	private int relaunch = 0;
 
 	/**
-	 * 
-	 * @param graphic
+	 *  @param graphic
 	 *            l'interface graphique
 	 * @param width
 	 *            largeur en cases
-	 * @param height
-	 *            hauteur en cases
-	 * @param minSpeedInTimerLoop
-	 *            Vitesse minimale, en nombre de tour de tempsDeJeu avant d�placement
-	 * @param defaultDensity
-	 *            densite de voiture utilisee par defaut pour les routes
-	 */
+     * @param height
+ *            hauteur en cases
+     * @param minSpeedInTimerLoop
+*            Vitesse minimale, en nombre de tour de tempsDeJeu avant d�placement
+     * @param defaultDensity
+     */
 	public Game(IFroggerGraphics graphic, int width, int height, int minSpeedInTimerLoop, double defaultDensity) {
 		super();
 		this.graphic = graphic;

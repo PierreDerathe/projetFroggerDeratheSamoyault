@@ -4,6 +4,8 @@ import gameCommons.IFrog;
 
 public interface IFroggerGraphics {
 
+
+
     void reset();
 	
 	/**
@@ -27,7 +29,7 @@ public interface IFroggerGraphics {
      * @param frog
      */
     public void setFrog(IFrog frog);
-    
+
     /**
      * Lance un �cran de fin de partie
      * @param message le texte � afficher
