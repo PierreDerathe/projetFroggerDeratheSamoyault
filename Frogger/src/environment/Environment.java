@@ -56,11 +56,6 @@ public class Environment implements IEnvironment {
     }
 
     public int isOnTrap(Case c){
-        int tmp;
-        for(Lane l: road){
-            tmp = l.isOnTrapAndAddToGraphics(c);
-            if(tmp != -1) return tmp;
-        }
-        return -1;
+        return road.get(c.ord).isOnTrap(c);
     }
 }

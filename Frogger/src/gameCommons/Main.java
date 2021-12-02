@@ -38,7 +38,7 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				game.update();
 				graphic.repaint();
-				if(game.getTempsDeJeu() == "C'est repartie") {
+				if(game.getRelaunch() == 2) {
 					//Cr�ation de l'interface graphique
 					graphic.reset();
 					//Cr�ation de la partie

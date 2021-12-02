@@ -89,7 +89,7 @@ public class Game {
 	public void testTrap() {
 		switch (environment.isOnTrap(frog.getPosition())) {
 			case 0 : endGame(); break;
-			case 1 : frog.move(Direction.up); break;
+			case 1 : frog.move(Direction.up); frog.move(Direction.up); break;
 			case 2 : score += 3;
 		}
 	}
@@ -110,10 +110,13 @@ public class Game {
 		return environment.isWinningPosition(frog.getPosition());
 	}
 
-	public String getTempsDeJeu() { return tempsDeJeu; }
+	public int getRelaunch() {
+		return relaunch;
+	}
 
 	public void endGame() {
 		tempsDeJeu = String.valueOf(environment.getTimer());
+		relaunch = 1;
 		graphic.endGameScreen("Score : " + score + " Temps : " + tempsDeJeu);
 	}
 
@@ -122,20 +125,22 @@ public class Game {
 	 * partie.
 	 */
 	public void update() {
-		if (tempsDeJeu == null) {
+		if (relaunch == 0) {
 			graphic.clear();
 			environment.update();
 			this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 			if (testLose()) {
 				endGame();
 			}
+			testTrap();
 		}
 	}
 
-	public void launchReset() { tempsDeJeu = "C'est repartie";}
+	public void launchReset() { relaunch = 2;}
 
 	public void reset() {
 		tempsDeJeu = null;
+		relaunch = 0;
 		tabScore.add(score);
 		System.out.println(score);
 		score = 0;

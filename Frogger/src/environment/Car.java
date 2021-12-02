@@ -26,14 +26,6 @@ public class Car extends CaseEvent {
 		return leftPosition.absc+length>=0 && leftPosition.absc<game.width; // Confusion entre && et ||
 	}
 
-	public boolean coversCase(Case c){
-		if(c.ord != leftPosition.ord){
-			return false;
-		}else{
-			return c.absc >= leftPosition.absc && c.absc < leftPosition.absc + length;
-		}
-	}
-
 		/* Fourni : addToGraphics() permettant d'ajouter un element graphique correspondant a la voiture*/
 	public void addToGraphics() {
 		for (int i = 0; i < length; i++) {

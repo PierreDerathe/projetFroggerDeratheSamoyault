@@ -17,18 +17,22 @@ public class Lane {
 	public Lane(gameCommons.Game game, int ord, double density) {
 		this.game = game;
 		this.ord = ord;
-		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 4;
+		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 3;
 		this.leftToRight = game.randomGen.nextBoolean();
 		this.density = density;
-		for (int i = 0; i < 40; i++) {
+		for (int i = 0; i < 50; i++) {
 			update(i);
 		}
 	}
 
-	public Lane(gameCommons.Game game, int ord) { this(game, ord, game.defaultDensity); }
+	public Lane(gameCommons.Game game, int ord) { 
+		this(game, ord, game.defaultDensity);
+		generateTrap();
+	}
 
 	public void update(int timer) {
 		moveCars(timer % speed == 0 );
+		addTrapsToGraphics();
 		removeOldCarsAndAddToGraphics();
 		mayAddCar();
 
@@ -54,6 +58,10 @@ public class Lane {
 		ord += n;
 		for (Car c : cars) {
 			c.moveOrd(n);
+		}
+		for (Trap trap :
+				traps) {
+			trap.moveOrd(n);
 		}
 	}
 
@@ -111,9 +119,13 @@ public class Lane {
 		return String.valueOf(cars.size());
 	}
 
-	public int isOnTrapAndAddToGraphics(Case c) {
+	public int isOnTrap(Case c) {
 		for (Trap trap : traps) {
 			if (trap.coversCase(c)) {
+				if (trap.getType() == 2) {
+					traps.remove(trap);
+					return 2;
+				}
 				return trap.getType();
 			}
 		}
@@ -121,12 +133,15 @@ public class Lane {
 	}
 
 	private void addTrapsToGraphics(){
-
+		for (Trap trap :
+				traps) {
+			trap.addToGraphics();
+		}
 	}
 
 	private void generateTrap(){
 		for (int i = 0; i < game.width; i++) {
-			if (game.randomGen.nextDouble() < density) {
+			if (game.randomGen.nextDouble() < game.defaultDensity) {
 				traps.add(new Trap(new Case(i, ord), game, game.randomGen.nextInt(3)));
 			}
 		}
