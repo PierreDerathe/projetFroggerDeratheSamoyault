@@ -14,17 +14,16 @@ public class Trap extends CaseEvent{
     public Trap(Case leftPosition, Game game, int type){
         super(game, leftPosition);
         this.type = type;
-        color.add(Color.RED);
+        color.add(Color.GRAY);
         color.add(Color.CYAN);
-        color.add(Color.ORANGE);
+        color.add(Color.YELLOW);
     }
-
 
     public int getType() {
         return type;
     }
 
-    private void addToGraphics() {
+    public void addToGraphics() {
         for (int i = 0; i < length; i++) {
             Color color = this.color.get(type);
             game.getGraphic()

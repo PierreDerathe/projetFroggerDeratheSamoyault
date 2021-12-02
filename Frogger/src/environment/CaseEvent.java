@@ -22,7 +22,7 @@ public class CaseEvent {
         leftPosition = new Case(leftPosition.absc, leftPosition.ord + n);
     }
 
-    public boolean appearsInBounds(){
+    public boolean appearsInBoundsAndAddToGraphics(){
         //addToGraphics(); pour plus tard maybe
         return leftPosition.absc+length>=0 && leftPosition.absc<game.width;
     }
@@ -35,7 +35,7 @@ public class CaseEvent {
         }
     }
 
-    private void addToGraphics() {
+    public void addToGraphics() {
         for (int i = 0; i < length; i++) {
             Color color = this.colors.get(0);
             game.getGraphic()

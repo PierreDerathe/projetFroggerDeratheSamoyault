@@ -12,12 +12,12 @@ public class Lane {
 	private boolean leftToRight;
 	private double density;
 	private ArrayList<Car> cars = new ArrayList<>();
-	private ArrayList<Trap>listPiege;
+	private ArrayList<Trap> traps = new ArrayList<>();
 
 	public Lane(gameCommons.Game game, int ord, double density) {
 		this.game = game;
 		this.ord = ord;
-		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 2;
+		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 4;
 		this.leftToRight = game.randomGen.nextBoolean();
 		this.density = density;
 		for (int i = 0; i < 40; i++) {
@@ -29,7 +29,7 @@ public class Lane {
 
 	public void update(int timer) {
 		moveCars(timer % speed == 0 );
-		removeOldCars();
+		removeOldCarsAndAddToGraphics();
 		mayAddCar();
 
 		// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
@@ -57,18 +57,13 @@ public class Lane {
 		}
 	}
 
-	private void removeOldCars() {
-//		if(!cars.isEmpty())
-//			while (!cars.get(0).appearsInBounds())
-//				cars.remove(0);
+	private void removeOldCarsAndAddToGraphics() {
 		ArrayList<Car> needDelete = new ArrayList<>();
-		for (Car c :
-				cars) {
-			if (!c.appearsInBounds())
+		for (Car c : cars) {
+			if (!c.appearsInBoundsAndAddToGraphics())
 				needDelete.add(c);
 		}
-		for (Car c :
-				needDelete) {
+		for (Car c : needDelete) {
 			cars.remove(c);
 		}
 	}
@@ -116,13 +111,24 @@ public class Lane {
 		return String.valueOf(cars.size());
 	}
 
-
-	public int isOnTrap(Case c) {
-		for (Trap trap : listPiege) {
+	public int isOnTrapAndAddToGraphics(Case c) {
+		for (Trap trap : traps) {
 			if (trap.coversCase(c)) {
 				return trap.getType();
 			}
 		}
 		return -1;
+	}
+
+	private void addTrapsToGraphics(){
+
+	}
+
+	private void generateTrap(){
+		for (int i = 0; i < game.width; i++) {
+			if (game.randomGen.nextDouble() < density) {
+				traps.add(new Trap(new Case(i, ord), game, game.randomGen.nextInt(3)));
+			}
+		}
 	}
 }

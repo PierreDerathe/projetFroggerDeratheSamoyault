@@ -40,7 +40,7 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 		this.height = height;
 		elementsToDisplay = new ArrayList<>();
 
-		setBackground(Color.GRAY);
+		setBackground(Color.BLACK);
 		setPreferredSize(new Dimension(width * pixelByCase, height * pixelByCase));
 
 		JFrame frame = new JFrame("Frogger");

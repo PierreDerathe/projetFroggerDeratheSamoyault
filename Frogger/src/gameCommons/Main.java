@@ -16,9 +16,9 @@ public class Main {
 		//Caract�ristiques du jeu
 		int width = 26;
 		int height = 20;
-		int tempo = 100;
-		int minSpeedInTimerLoops = 3;
-		double defaultDensity = 0.05;
+		int tempo = 50;
+		int minSpeedInTimerLoops = 6;
+		double defaultDensity = 0.02;
 		
 		//Cr�ation de l'interface graphique
 		IFroggerGraphics graphic = new FroggerGraphic(width, height);
