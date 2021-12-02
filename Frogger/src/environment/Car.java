@@ -28,11 +28,6 @@ public class Car extends CaseEvent {
 		leftPosition = new Case(leftPosition.absc + (leftToRight ? 1 : (-1)), leftPosition.ord);
 	}
 
-	public boolean appearsInBoundsAndAddToGraphics(){
-		addToGraphics();
-		return leftPosition.absc+length>=0 && leftPosition.absc<game.width; // Confusion entre && et ||
-	}
-
 		/* Fourni : addToGraphics() permettant d'ajouter un element graphique correspondant a la voiture*/
 	public void addToGraphics() {
 		for (int i = 0; i < length; i++) {

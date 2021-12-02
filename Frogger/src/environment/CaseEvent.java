@@ -22,9 +22,8 @@ public class CaseEvent {
         leftPosition = new Case(leftPosition.absc, leftPosition.ord + n);
     }
 
-    public boolean appearsInBoundsAndAddToGraphics(){
-        //addToGraphics(); pour plus tard maybe
-        return leftPosition.absc+length>=0 && leftPosition.absc<game.width;
+    public boolean appearsInBounds(){
+        return leftPosition.absc+length>=0 && leftPosition.absc<game.width+2;
     }
 
     public boolean coversCase(Case c){

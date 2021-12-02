@@ -1,8 +1,10 @@
 package environment;
 
+import graphicalElements.Element;
 import util.Case;
 import gameCommons.Game;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Lane {
@@ -10,6 +12,7 @@ public class Lane {
 	private int ord;
 	private int speed;
 	private boolean leftToRight;
+	private boolean roadOrRiver = true;
 	private double density;
 	private ArrayList<Car> cars = new ArrayList<>();
 	private ArrayList<Trap> traps = new ArrayList<>();
@@ -20,19 +23,32 @@ public class Lane {
 		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 3;
 		this.leftToRight = game.randomGen.nextBoolean();
 		this.density = density;
-		for (int i = 0; i < 50; i++) {
-			update(i);
-		}
 	}
 
 	public Lane(gameCommons.Game game, int ord) { 
 		this(game, ord, game.defaultDensity);
 		generateTrap();
+		for (int i = 0; i < 50; i++) {
+			update(i);
+		}
+	}
+
+	public Lane(gameCommons.Game game, int ord, boolean roadOrRiver) {
+		this(game, ord, game.defaultDensity);
+		this.roadOrRiver = roadOrRiver;
+		if (roadOrRiver) generateTrap();
+		else density = 0.4;
+		for (int i = 0; i < 50; i++) {
+			moveCars(i % speed == 0 );
+			removeOldCarsAndAddToGraphics();
+			mayAddCar();
+		}
 	}
 
 	public void update(int timer) {
 		moveCars(timer % speed == 0 );
 		addTrapsToGraphics();
+		addRiverToGraphics();
 		removeOldCarsAndAddToGraphics();
 		mayAddCar();
 
@@ -59,8 +75,7 @@ public class Lane {
 		for (Car c : cars) {
 			c.moveOrd(n);
 		}
-		for (Trap trap :
-				traps) {
+		for (Trap trap : traps) {
 			trap.moveOrd(n);
 		}
 	}
@@ -68,7 +83,8 @@ public class Lane {
 	private void removeOldCarsAndAddToGraphics() {
 		ArrayList<Car> needDelete = new ArrayList<>();
 		for (Car c : cars) {
-			if (!c.appearsInBoundsAndAddToGraphics())
+			c.addToGraphics();
+			if (!c.appearsInBounds())
 				needDelete.add(c);
 		}
 		for (Car c : needDelete) {
@@ -85,19 +101,25 @@ public class Lane {
 	 * densit�, si la premi�re case de la voie est vide
 	 */
 	private void mayAddCar() {
-		if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
-			if (game.randomGen.nextDouble() < density) {
-				cars.add(new Car(game, getBeforeFirstCase(), leftToRight));
+		if (roadOrRiver)
+			if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
+				if (game.randomGen.nextDouble() < density) {
+					cars.add(new Car(game, getBeforeFirstCase(), leftToRight));
+				}
 			}
-		}
+		else
+			if (!isSafe(getFirstCase()) && !isSafe(getBeforeFirstCase())) {
+				if (game.randomGen.nextDouble() < density) {
+					cars.add(new Car(game, getBeforeFirstCase(), leftToRight));
+				}
+			}
 	}
 
 	public boolean isSafe(util.Case pos) {
-		for (Car c :
-				cars) {
-			if (c.coversCase(pos)) return false;
+		for (Car c : cars) {
+			if (c.coversCase(pos)) return !roadOrRiver;
 		}
-		return true;
+		return roadOrRiver;
 	}
 
 	private Case getFirstCase() {
@@ -111,7 +133,11 @@ public class Lane {
 		if (leftToRight) {
 			return new Case(-1, ord);
 		} else
-			return new Case(game.width, ord);
+			return new Case(game.width - 1, ord);
+	}
+
+	public boolean isRoadOrRiver() {
+		return roadOrRiver;
 	}
 
 	@Override
@@ -136,6 +162,16 @@ public class Lane {
 		for (Trap trap :
 				traps) {
 			trap.addToGraphics();
+		}
+	}
+
+	private void addRiverToGraphics(){
+		if (!roadOrRiver) {
+			Color color = new Color(13, 121, 219);
+			for (int i = 0; i < game.width; i++) {
+				game.getGraphic()
+						.add(new Element(i, ord, color));
+			}
 		}
 	}
 

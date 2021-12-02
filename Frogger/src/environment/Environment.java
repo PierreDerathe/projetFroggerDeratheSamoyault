@@ -42,8 +42,14 @@ public class Environment implements IEnvironment {
 
     @Override
     public void shiftForward() {
+        boolean tmp = true;
+//        if (game.randomGen.nextDouble() < 0.9) {
+//            tmp = road.get(road.size() - 1).isRoadOrRiver();
+//        } else {
+//            tmp = !road.get(road.size() - 1).isRoadOrRiver();
+//        }
         road.remove(0);
-        road.add(new Lane(game, game.height));
+        road.add(new Lane(game, game.height, tmp));
         for (Lane l :
                 road) {
             l.moveOrd(-1);
