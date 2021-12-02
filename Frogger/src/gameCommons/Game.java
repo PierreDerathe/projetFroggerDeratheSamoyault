@@ -137,7 +137,7 @@ public class Game {
 			testTrap();
 		}
 	}
-
+	//Fixe la condition pour relancer le jeu.
 	public void launchReset() { relaunch = 2;}
 
 	public void reset() {
