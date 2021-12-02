@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class Car extends CaseEvent {
 	private final boolean leftToRight;
-	private final Color colorLtR = Color.BLACK;
+	private final Color colorLtR = Color.red;
 	private final Color colorRtL = Color.BLUE;
 
 	public Car(Game game, Case leftPosition, boolean leftToRight){
