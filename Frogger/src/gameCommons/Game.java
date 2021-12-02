@@ -1,5 +1,7 @@
 package gameCommons;
 
+import environment.Environment;
+import frog.Frog;
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
 import util.Direction;
@@ -144,7 +146,10 @@ public class Game {
 		tabScore.add(score);
 		System.out.println(score);
 		score = 0;
-
+		graphic.reset();
+		setFrog(new Frog(this));
+		graphic.setFrog(frog);
+		setEnvironment(new Environment(this));
 	}
 
 }
