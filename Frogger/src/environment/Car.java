@@ -8,6 +8,7 @@ import java.awt.*;
 
 public class Car extends CaseEvent {
 	private final boolean leftToRight;
+	private boolean onGround = false;
 
 	public Car(Game game, Case leftPosition, boolean leftToRight){
 		super(game, leftPosition);
@@ -15,8 +16,14 @@ public class Car extends CaseEvent {
 		this.length = 2;
 		this.colors.add(Color.RED);
 		this.colors.add(Color.BLUE);
+		this.colors.add(new Color(139,69,19));
 	}
-	
+
+	public Car(Game game, Case leftPosition, boolean leftToRight, boolean onGround){
+		this(game, leftPosition, leftToRight);
+		this.onGround = onGround;
+	}
+
 	public void moveAbs(){
 		leftPosition = new Case(leftPosition.absc + (leftToRight ? 1 : (-1)), leftPosition.ord);
 	}
