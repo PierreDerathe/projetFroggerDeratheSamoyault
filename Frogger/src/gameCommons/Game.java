@@ -117,7 +117,7 @@ public class Game {
 	}
 
 	public void endGame() {
-		tempsDeJeu = String.valueOf(environment.getTimer());
+		tempsDeJeu = String.valueOf(environment.getTimer()/20) + "s";
 		relaunch = 1;
 		graphic.endGameScreen("Score : " + score + " Temps : " + tempsDeJeu);
 	}
