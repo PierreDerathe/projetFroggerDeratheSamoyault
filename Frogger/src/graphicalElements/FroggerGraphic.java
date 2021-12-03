@@ -74,7 +74,7 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 			g.setColor(e.color);
 			g.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
 			Graphics2D newG= (Graphics2D) g;
-			//newG.drawImage(e.sprite, pixelByCase*e.absc,pixelByCase*(height-1-e.ord), pixelByCase, pixelByCase,null);
+			newG.drawImage(e.sprite, pixelByCase*e.absc,pixelByCase*(height-1-e.ord), pixelByCase, pixelByCase,null);
 		}
 	}
 

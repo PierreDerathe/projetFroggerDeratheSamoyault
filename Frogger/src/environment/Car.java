@@ -16,7 +16,7 @@ public class Car extends CaseEvent {
 		this.length = 2;
 		this.colors.add(Color.RED);
 		this.colors.add(Color.BLUE);
-		this.colors.add(new Color(139,69,19));
+		this.colors.add(new Color(82, 41, 2));
 	}
 
 	public Car(Game game, Case leftPosition, boolean leftToRight, int length){
