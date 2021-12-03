@@ -18,7 +18,7 @@ public class Main {
 		int height = 20;
 		int tempo = 50;
 		int minSpeedInTimerLoops = 6;
-		double defaultDensity = 0.02;
+		double defaultDensity = 0.01;
 		
 		//Cr�ation de l'interface graphique
 		IFroggerGraphics graphic = new FroggerGraphic(width, height);
@@ -38,9 +38,6 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				game.update();
 				graphic.repaint();
-				if(game.getRelaunch() == 2) {
-					game.reset();
-				}
 			}
 		});
 		timer.setInitialDelay(0);

@@ -18,7 +18,8 @@ public class Game {
 	public final int width;
 	public final int height;
 	public final int minSpeedInTimerLoops;
-	public final double defaultDensity;
+	private final double defaultDensity;
+	public double density;
 
 	// Lien aux objets utilis�s
 	private IEnvironment environment;
@@ -30,8 +31,6 @@ public class Game {
 	private Integer score = 0;
 	private String tempsDeJeu;
 	private ArrayList<Integer> tabScore = new ArrayList<>();
-	private int relaunch = 0;
-
 	/**
 	 *  @param graphic
 	 *            l'interface graphique
@@ -41,15 +40,16 @@ public class Game {
  *            hauteur en cases
      * @param minSpeedInTimerLoop
 *            Vitesse minimale, en nombre de tour de tempsDeJeu avant d�placement
-     * @param defaultDensity
+     * @param density
      */
-	public Game(IFroggerGraphics graphic, int width, int height, int minSpeedInTimerLoop, double defaultDensity) {
+	public Game(IFroggerGraphics graphic, int width, int height, int minSpeedInTimerLoop, double density) {
 		super();
 		this.graphic = graphic;
 		this.width = width;
 		this.height = height;
 		this.minSpeedInTimerLoops = minSpeedInTimerLoop;
-		this.defaultDensity = defaultDensity;
+		this.density = density;
+		this.defaultDensity = density;
 	}
 
 	/**
@@ -100,6 +100,7 @@ public class Game {
 		frog.move(Direction.down);
 		environment.shiftForward();
 		score++;
+		density += 0.001;
 	}
 
 	/**
@@ -112,13 +113,8 @@ public class Game {
 		return environment.isWinningPosition(frog.getPosition());
 	}
 
-	public int getRelaunch() {
-		return relaunch;
-	}
-
 	public void endGame() {
 		tempsDeJeu = String.valueOf(environment.getTimer()/20) + "s";
-		relaunch = 1;
 		graphic.endGameScreen("Score : " + score + " Temps : " + tempsDeJeu);
 	}
 
@@ -127,7 +123,7 @@ public class Game {
 	 * partie.
 	 */
 	public void update() {
-		if (relaunch == 0) {
+		if (tempsDeJeu == null) {
 			graphic.clear();
 			environment.update();
 			this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
@@ -138,14 +134,19 @@ public class Game {
 		}
 	}
 
-	public void launchReset() { relaunch = 2;}
+	public int getOrd() { return frog.getPosition().ord;	}
+
+	public void moveSideway(boolean leftToRight) {
+		if (leftToRight) frog.move(Direction.right);
+		else frog.move(Direction.left);
+	}
 
 	public void reset() {
 		tempsDeJeu = null;
-		relaunch = 0;
 		tabScore.add(score);
 		System.out.println(score);
 		score = 0;
+		density = defaultDensity;
 		graphic.reset();
 		setFrog(new Frog(this));
 		graphic.setFrog(frog);

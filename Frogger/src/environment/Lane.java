@@ -1,21 +1,17 @@
 package environment;
 
-import graphicalElements.Element;
 import util.Case;
 import gameCommons.Game;
-
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Lane {
-	private Game game;
-	private int ord;
-	private int speed;
-	private boolean leftToRight;
-	private boolean roadOrRiver = true;
-	private double density;
-	private ArrayList<Car> cars = new ArrayList<>();
-	private ArrayList<Trap> traps = new ArrayList<>();
+	protected Game game;
+	protected int ord;
+	protected int speed;
+	protected boolean leftToRight;
+	protected double density;
+	protected ArrayList<Car> cars = new ArrayList<>();
+	protected ArrayList<Trap> traps = new ArrayList<>();
 
 	public Lane(gameCommons.Game game, int ord, double density) {
 		this.game = game;
@@ -26,29 +22,28 @@ public class Lane {
 	}
 
 	public Lane(gameCommons.Game game, int ord) { 
-		this(game, ord, game.defaultDensity);
+		this(game, ord, game.density);
 		generateTrap();
 		for (int i = 0; i < 50; i++) {
 			update(i);
 		}
 	}
 
-	public Lane(gameCommons.Game game, int ord, boolean roadOrRiver) {
-		this(game, ord, game.defaultDensity);
-		this.roadOrRiver = roadOrRiver;
-		if (roadOrRiver) generateTrap();
-		else density = 0.4;
-		for (int i = 0; i < 50; i++) {
-			moveCars(i % speed == 0 );
-			removeOldCarsAndAddToGraphics();
-			mayAddCar();
-		}
-	}
+//	public Lane(gameCommons.Game game, int ord, boolean roadOrRiver) {
+//		this(game, ord, game.density);
+//		this.roadOrRiver = roadOrRiver;
+//		if (roadOrRiver) generateTrap();
+//		else density = 0.4;
+//		for (int i = 0; i < 50; i++) {
+//			moveCars(i % speed == 0 );
+//			removeOldCarsAndAddToGraphics();
+//			mayAddCar();
+//		}
+//	}
 
 	public void update(int timer) {
 		moveCars(timer % speed == 0 );
 		addTrapsToGraphics();
-		addRiverToGraphics();
 		removeOldCarsAndAddToGraphics();
 		mayAddCar();
 
@@ -63,7 +58,7 @@ public class Lane {
 
 	}
 
-	private void moveCars(boolean b) {
+	protected void moveCars(boolean b) {
 		if (b) for (Car car :
 				cars) {
 			car.moveAbs();
@@ -100,44 +95,33 @@ public class Lane {
 	 * Ajoute une voiture au d�but de la voie avec probabilit� �gale � la
 	 * densit�, si la premi�re case de la voie est vide
 	 */
-	private void mayAddCar() {
-		if (roadOrRiver)
-			if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
-				if (game.randomGen.nextDouble() < density) {
-					cars.add(new Car(game, getBeforeFirstCase(), leftToRight));
-				}
+	protected void mayAddCar() {
+		if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
+			if (game.randomGen.nextDouble() < density) {
+				cars.add(new Car(game, getBeforeFirstCase(), leftToRight));
 			}
-		else
-			if (!isSafe(getFirstCase()) && !isSafe(getBeforeFirstCase())) {
-				if (game.randomGen.nextDouble() < density) {
-					cars.add(new Car(game, getBeforeFirstCase(), leftToRight));
-				}
-			}
-	}
-
-	public boolean isSafe(util.Case pos) {
-		for (Car c : cars) {
-			if (c.coversCase(pos)) return !roadOrRiver;
 		}
-		return roadOrRiver;
 	}
 
-	private Case getFirstCase() {
+	public boolean isSafe(Case pos) {
+		for (Car c : cars) {
+			if (c.coversCase(pos)) return false;
+		}
+		return true;
+	}
+
+	protected Case getFirstCase() {
 		if (leftToRight) {
 			return new Case(0, ord);
 		} else
 			return new Case(game.width - 1, ord);
 	}
 
-	private Case getBeforeFirstCase() {
+	protected Case getBeforeFirstCase() {
 		if (leftToRight) {
 			return new Case(-1, ord);
 		} else
 			return new Case(game.width - 1, ord);
-	}
-
-	public boolean isRoadOrRiver() {
-		return roadOrRiver;
 	}
 
 	@Override
@@ -165,19 +149,9 @@ public class Lane {
 		}
 	}
 
-	private void addRiverToGraphics(){
-		if (!roadOrRiver) {
-			Color color = new Color(13, 121, 219);
-			for (int i = 0; i < game.width; i++) {
-				game.getGraphic()
-						.add(new Element(i, ord, color));
-			}
-		}
-	}
-
 	private void generateTrap(){
 		for (int i = 0; i < game.width; i++) {
-			if (game.randomGen.nextDouble() < game.defaultDensity) {
+			if (game.randomGen.nextDouble() < game.density) {
 				traps.add(new Trap(new Case(i, ord), game, game.randomGen.nextInt(3)));
 			}
 		}
