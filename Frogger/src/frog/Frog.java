@@ -40,6 +40,6 @@ public class Frog implements IFrog {
 		if (position.ord > game.height/3) game.ShiftForward();
 	}
 
-	public void launchReset() { game.launchReset(); }
+	public void launchReset() { game.reset(); }
 
 }

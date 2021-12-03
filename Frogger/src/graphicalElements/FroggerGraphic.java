@@ -58,14 +58,7 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 
 	public void reset(){
 		elementsToDisplay.clear();
-
-		setBackground(Color.BLACK);
-		setPreferredSize(new Dimension(width * pixelByCase, height * pixelByCase));
-
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(this);
-		frame.pack();
-		frame.setVisible(true);
 	}
 
 	public void paintComponent(Graphics g) {

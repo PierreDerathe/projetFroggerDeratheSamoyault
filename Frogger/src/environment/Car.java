@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class Car extends CaseEvent {
 	private final boolean leftToRight;
-	private boolean onGround = false;
+	private boolean onGround = true;
 
 	public Car(Game game, Case leftPosition, boolean leftToRight){
 		super(game, leftPosition);
@@ -19,24 +19,20 @@ public class Car extends CaseEvent {
 		this.colors.add(new Color(139,69,19));
 	}
 
-	public Car(Game game, Case leftPosition, boolean leftToRight, boolean onGround){
+	public Car(Game game, Case leftPosition, boolean leftToRight, int length){
 		this(game, leftPosition, leftToRight);
-		this.onGround = onGround;
+		this.onGround = false;
+		this.length = length;
 	}
 
 	public void moveAbs(){
 		leftPosition = new Case(leftPosition.absc + (leftToRight ? 1 : (-1)), leftPosition.ord);
 	}
 
-	public boolean appearsInBoundsAndAddToGraphics(){
-		addToGraphics();
-		return leftPosition.absc+length>=0 && leftPosition.absc<game.width; // Confusion entre && et ||
-	}
-
 		/* Fourni : addToGraphics() permettant d'ajouter un element graphique correspondant a la voiture*/
 	public void addToGraphics() {
+		Color color = colors.get(onGround? leftToRight? 1 : 0 : 2);
 		for (int i = 0; i < length; i++) {
-			Color color = colors.get(leftToRight? 1 : 0);
 			game.getGraphic()
 					.add(new Element(leftPosition.absc + i, leftPosition.ord, color));
 		}
