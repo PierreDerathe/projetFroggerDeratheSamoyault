@@ -29,18 +29,6 @@ public class Lane {
 		}
 	}
 
-//	public Lane(gameCommons.Game game, int ord, boolean roadOrRiver) {
-//		this(game, ord, game.density);
-//		this.roadOrRiver = roadOrRiver;
-//		if (roadOrRiver) generateTrap();
-//		else density = 0.4;
-//		for (int i = 0; i < 50; i++) {
-//			moveCars(i % speed == 0 );
-//			removeOldCarsAndAddToGraphics();
-//			mayAddCar();
-//		}
-//	}
-
 	public void update(int timer) {
 		moveCars(timer % speed == 0 );
 		addTrapsToGraphics();

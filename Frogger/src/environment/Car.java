@@ -31,8 +31,8 @@ public class Car extends CaseEvent {
 
 		/* Fourni : addToGraphics() permettant d'ajouter un element graphique correspondant a la voiture*/
 	public void addToGraphics() {
+		Color color = colors.get(onGround? leftToRight? 1 : 0 : 2);
 		for (int i = 0; i < length; i++) {
-			Color color = colors.get(onGround? leftToRight? 1 : 0 : 2);
 			game.getGraphic()
 					.add(new Element(leftPosition.absc + i, leftPosition.ord, color));
 		}

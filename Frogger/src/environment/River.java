@@ -33,7 +33,7 @@ public class River extends Lane{
 
     @Override
     protected void mayAddCar() {
-        if (!isSafe(getFirstCase()) && !isSafe(getBeforeFirstCase())) {
+        if (super.isSafe(getFirstCase()) && super.isSafe(getBeforeFirstCase())) {
             if (game.randomGen.nextDouble() < density) {
                 cars.add(new Car(game, getBeforeFirstCase(), leftToRight, game.randomGen.nextInt(3)+2));
             }

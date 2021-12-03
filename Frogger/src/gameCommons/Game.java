@@ -153,4 +153,8 @@ public class Game {
 		setEnvironment(new Environment(this));
 	}
 
+	public String getTempsDeJeu(){
+		return tempsDeJeu;
+	}
+
 }

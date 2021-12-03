@@ -36,8 +36,10 @@ public class Main {
 		Timer timer = new Timer(tempo, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.update();
-				graphic.repaint();
+				if (game.getTempsDeJeu() == null) {
+					game.update();
+					graphic.repaint();
+				}
 			}
 		});
 		timer.setInitialDelay(0);
